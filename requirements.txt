@@ -1,0 +1,9 @@
+streamlit
+opencv-contrib-python-headless
+pandas
+joblib 
+scikit-learn
+matplotlib
+math
+#tensorflow
+altair
