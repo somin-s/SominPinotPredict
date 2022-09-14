@@ -208,9 +208,9 @@ def PreVintage(df):
         vintage = 0
     elif df == "2019":
         vintage = 1
-    elif df == "2019":
+    elif df == "2020":
         vintage = 3
-    elif df == "2022":
+    elif df == "2021":
         vintage = 2
         
     return vintage
@@ -235,16 +235,16 @@ Vineyard = input1
 Vintage = input2
 Cluster_number = input3
 
-Cluster_weight = np.log10(input4/20+20)
+Cluster_weight = np.log10(input4/50+1)
 Total_Shoot_number = input5
 Shoot_number_gt_5mm = input6 
 Shoot_number_lt_5mm = input7
 Blind_buds = input8
 Leaf_in_fruit_zone = np.log10(input9)*(-1)
 Vine_canopy = np.log10(input10)*(-1)
-Leaf_Area_per_vine = np.log10(input11/1000)
-Leaf_Area_per_m = np.log10(input12/1000)
-Berrry_weight = np.log10(input13/10+5)
+Leaf_Area_per_vine = np.log10(input11/10000+1)
+Leaf_Area_per_m = np.log10(input12/10000+1)
+Berrry_weight = np.log10(input13/10+1)
 #Output first module
 FirstMol_value = model_1.predict([[Cluster_number, Cluster_weight, Total_Shoot_number, Shoot_number_gt_5mm, Leaf_in_fruit_zone, Vine_canopy, Leaf_Area_per_vine, Leaf_Area_per_m, Berrry_weight]])
 OutputFirstModule(FirstMol_value[0])
@@ -252,7 +252,7 @@ OutputFirstModule(FirstMol_value[0])
 #Preprocess for Module2
 Leaf_in_fruit_zone = np.log10(input9+2)
 Vine_canopy = np.log10(input10+2)
-Leaf_Area_per_vine = np.log10(input11/1000+1)
+Leaf_Area_per_vine = np.log10(input11/10000+1)
 Leaf_Area_per_m = np.log10(input12/1000+10)
 Berrry_weight = np.log10(input13+2)
 #Output second & third module
