@@ -4,6 +4,6 @@ pandas
 joblib 
 scikit-learn
 matplotlib
-math
+#math
 #tensorflow
 altair
