@@ -20,7 +20,7 @@ model_4 = joblib.load('model4_final.joblib')
 
 st.write("""
 # Wine Quality Prediction
-This app predicts the ** Quality of Wine **  using **wine features** input via the **select boxes and side panels** 
+This app predicts the ** Quality of Wine **  using **wine features** input via the **side panels** 
 """)
 st.sidebar.header('User Input Parameters') #user input parameter collection with streamlit side bar
 
@@ -96,7 +96,7 @@ def Modules(prediction_proba1, prediction_proba2):
 #=============================================================================================================================== Main
 Cluster_number = st.sidebar.slider('Cluster number', 1.0, 52.0, 23.0, 1.0) 
 Cluster_weight = st.sidebar.slider('Cluster weight', 35.0, 253.0, 144.0, 1.0) 
-Shoot_number_more_5mm = st.sidebar.slider('Shoot number> 5mm', 4.0, 30.0, 4.0, 1.0) 
+Shoot_number_more_5mm = st.sidebar.slider('Shoot number> 5mm', 4.0, 30.0, 12.0, 1.0) 
 Vine_canopy = st.sidebar.slider('Vine_canopy', 0.0, 1.0, 0.5, 0.001) 
 Leaf_Area_per_m = st.sidebar.slider('Leaf Area/m', 2800.0, 32000.0, 12000.0, 1.0) 
 Berry_weight = st.sidebar.slider('Berry weight', 1.0, 2.0, 1.78, 0.001) 
@@ -117,17 +117,17 @@ Vine_canopy_input = pd.to_numeric(data.get("Vine_canopy")[0])
 Leaf_area_input = pd.to_numeric(data.get("Leaf_Area_per_m")[0])
 Berry_weight_input = pd.to_numeric(data.get("Berry_weight")[0])
 
-Cluster_number_ran = np.random.normal(Cluster_number_input,2.4,15)
-Cluster_weight_ran = np.random.normal(Cluster_weight_input,2.4,15)
-Shoot_number_more_5mm_ran = np.random.normal(Shoot_num_input,2.4,15)
-Vine_canopy_ran = np.random.normal(Vine_canopy_input,0.1,15)
-Leaf_Area_per_m_ran = np.random.normal(Leaf_area_input,13.6,15)
-Berry_weight_ran = np.random.normal(Berry_weight_input,0.1,15)
+Cluster_number_ran = np.random.normal(Cluster_number_input,2.4,30)
+Cluster_weight_ran = np.random.normal(Cluster_weight_input,2.4,30)
+Shoot_number_more_5mm_ran = np.random.normal(Shoot_num_input,2.4,30)
+Vine_canopy_ran = np.random.normal(Vine_canopy_input,0.1,30)
+Leaf_Area_per_m_ran = np.random.normal(Leaf_area_input,13.6,30)
+Berry_weight_ran = np.random.normal(Berry_weight_input,0.1,30)
 
 Arr_Quality_yield = pd.DataFrame(columns=['Quality','Yield','Value'])
 Arr_Quality_yield_list = pd.DataFrame(columns=['Quality','Yield per wine','Yield per metre','Yield per metre2'])
 
-for i in range(10):
+for i in range(30):
 
     #Preprocess for Module1
     Cluster_number1 = np.log(Cluster_number_ran[i]/10+1)
@@ -165,22 +165,26 @@ for i in range(10):
     Arr_Quality_yield = Arr_Quality_yield.append({'Quality': source[0],'Yield': "Yield_per_m2",'Value': source[3], 'Info': "Information", 
     'Cluster number':cn,'Cluster weight':cw,'Shoot number':sn,'Vine canopy': vc,'Leaf area':la,'Berry weight':bw},ignore_index=True)
 
-    Arr_Quality_yield_list = Arr_Quality_yield_list.append({'Quality': source[0],'Yield per wine': source[1],'Yield per metre': source[2],'Yield per metre2': source[3]},ignore_index=True)
+    quality = round(source[0],2)
+    Yield_per_wine = round(source[1],2)
+    Yield_per_metre = round(source[2],2)
+    Yield_per_metre2 = round(source[3],2)
+    Arr_Quality_yield_list = Arr_Quality_yield_list.append({'Quality':quality,'Yield per wine': Yield_per_wine,'Yield per metre': Yield_per_metre,'Yield per metre2': Yield_per_metre2},ignore_index=True)
 
 #==============================================================================================================================plot graph
 category = px.scatter(Arr_Quality_yield, x="Value", y="Quality", color="Yield", hover_name='Info', hover_data=["Cluster number", "Cluster weight","Shoot number","Vine canopy","Leaf area","Berry weight"])
-category.update_xaxes(range=[1, 5])
-category.update_yaxes(range=[1, 6])
+category.update_xaxes(range=[2.5,3.5])
+category.update_yaxes(range=[4.5,5.5])
 st.plotly_chart(category, s=100)
 
 plot = px.scatter(Arr_Quality_yield, x="Value",y="Quality", color="Yield", facet_col="Yield",hover_name='Info', hover_data=["Cluster number", "Cluster weight","Shoot number","Vine canopy","Leaf area","Berry weight"])
-plot.update_xaxes(range=[1, 5])
-plot.update_yaxes(range=[1, 6])
+#plot.update_xaxes(range=[1, 5])
+#plot.update_yaxes(range=[1, 6])
 st.plotly_chart(plot, s=100)
 
 
 
-if st.checkbox("Show data table"):
+if st.checkbox("Ouput table"):
     st.table(Arr_Quality_yield_list)#show table
 
         
