@@ -1,9 +1,9 @@
 streamlit
-opencv-contrib-python-headless
 pandas
 joblib 
 scikit-learn
 matplotlib
+altair
+plotly
 #math
 #tensorflow
-altair
