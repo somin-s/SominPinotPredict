@@ -79,12 +79,6 @@ def Modules(prediction_proba1, prediction_proba2):
     Wine_total_anthocyanin = (np.exp(ThirdMol_value[0][3])-1)*500
     Wine_total_phenolics = (np.exp(ThirdMol_value[0][4])-1)*20
 
-    #source3 = pd.DataFrame({
-    #        'Value': ['Wine alcohol', 'Wine pH', 'Wine monomeric anthocyanins', 'Wine total anthocyanin', 'Wine total phenolics'],
-    #        'Rate': [Wine_alcohol,Wine_pH, Wine_monomeric_anthocyanins ,Wine_total_anthocyanin, Wine_total_phenolics]
-    #    })
-    #st.table(source3)#show table module3
-
     #module4 ==================================================================================================================
     Wine_alcohol = np.log(Wine_alcohol/10)
     Wine_pH = np.log(Wine_pH)
@@ -100,12 +94,12 @@ def Modules(prediction_proba1, prediction_proba2):
     return Quality_yieldperwine
 
 #=============================================================================================================================== Main
-Cluster_number = st.sidebar.slider('Cluster number', 1.0, 52.0, 25.0, 1.0) 
-Cluster_weight = st.sidebar.slider('Cluster weight', 35.0, 253.0, 138.0, 1.0) 
+Cluster_number = st.sidebar.slider('Cluster number', 1.0, 52.0, 23.0, 1.0) 
+Cluster_weight = st.sidebar.slider('Cluster weight', 35.0, 253.0, 144.0, 1.0) 
 Shoot_number_more_5mm = st.sidebar.slider('Shoot number> 5mm', 4.0, 30.0, 4.0, 1.0) 
 Vine_canopy = st.sidebar.slider('Vine_canopy', 0.0, 1.0, 0.5, 0.001) 
-Leaf_Area_per_m = st.sidebar.slider('Leaf Area/m', 2800.0, 32000.0, 2800.0, 1.0) 
-Berry_weight = st.sidebar.slider('Berry weight', 1.0, 2.0, 1.5, 0.001) 
+Leaf_Area_per_m = st.sidebar.slider('Leaf Area/m', 2800.0, 32000.0, 12000.0, 1.0) 
+Berry_weight = st.sidebar.slider('Berry weight', 1.0, 2.0, 1.78, 0.001) 
 
 features = {'Cluster_number': Cluster_number,
             'Cluster_weight': Cluster_weight,
@@ -127,7 +121,7 @@ Cluster_number_ran = np.random.normal(Cluster_number_input,2.4,15)
 Cluster_weight_ran = np.random.normal(Cluster_weight_input,2.4,15)
 Shoot_number_more_5mm_ran = np.random.normal(Shoot_num_input,2.4,15)
 Vine_canopy_ran = np.random.normal(Vine_canopy_input,0.1,15)
-Leaf_Area_per_m_ran = np.random.normal(Leaf_area_input,2.4,15)
+Leaf_Area_per_m_ran = np.random.normal(Leaf_area_input,13.6,15)
 Berry_weight_ran = np.random.normal(Berry_weight_input,0.1,15)
 
 Arr_Quality_yield = pd.DataFrame(columns=['Quality','Yield','Value'])
