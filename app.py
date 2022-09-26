@@ -117,9 +117,9 @@ Vine_canopy_input = pd.to_numeric(data.get("Vine_canopy")[0])
 Leaf_area_input = pd.to_numeric(data.get("Leaf_Area_per_m")[0])
 Berry_weight_input = pd.to_numeric(data.get("Berry_weight")[0])
 
-Cluster_number_ran = np.random.normal(Cluster_number_input,2.4,30)
-Cluster_weight_ran = np.random.normal(Cluster_weight_input,2.4,30)
-Shoot_number_more_5mm_ran = np.random.normal(Shoot_num_input,2.4,30)
+Cluster_number_ran = np.random.normal(Cluster_number_input,4.0,30)
+Cluster_weight_ran = np.random.normal(Cluster_weight_input,4.0,30)
+Shoot_number_more_5mm_ran = np.random.normal(Shoot_num_input,4.0,30)
 Vine_canopy_ran = np.random.normal(Vine_canopy_input,0.1,30)
 Leaf_Area_per_m_ran = np.random.normal(Leaf_area_input,13.6,30)
 Berry_weight_ran = np.random.normal(Berry_weight_input,0.1,30)
@@ -172,12 +172,13 @@ for i in range(30):
     Arr_Quality_yield_list = Arr_Quality_yield_list.append({'Quality':quality,'Yield per wine': Yield_per_wine,'Yield per metre': Yield_per_metre,'Yield per metre2': Yield_per_metre2},ignore_index=True)
 
 #==============================================================================================================================plot graph
-category = px.scatter(Arr_Quality_yield, x="Value", y="Quality", color="Yield", hover_name='Info', hover_data=["Cluster number", "Cluster weight","Shoot number","Vine canopy","Leaf area","Berry weight"])
-category.update_xaxes(range=[2.5,3.5])
-category.update_yaxes(range=[4.5,5.5])
+
+category = px.scatter(Arr_Quality_yield, x="Quality", y="Value", color="Yield", trendline= "ols", hover_name='Info', hover_data=["Cluster number", "Cluster weight","Shoot number","Vine canopy","Leaf area","Berry weight"])
+category.update_yaxes(range=[2.5,3.5])
+category.update_xaxes(range=[4.5,5.5])
 st.plotly_chart(category, s=100)
 
-plot = px.scatter(Arr_Quality_yield, x="Value",y="Quality", color="Yield", facet_col="Yield",hover_name='Info', hover_data=["Cluster number", "Cluster weight","Shoot number","Vine canopy","Leaf area","Berry weight"])
+plot = px.scatter(Arr_Quality_yield, x="Quality",y="Value", color="Yield", facet_col="Yield",hover_name='Info', hover_data=["Cluster number", "Cluster weight","Shoot number","Vine canopy","Leaf area","Berry weight"])
 #plot.update_xaxes(range=[1, 5])
 #plot.update_yaxes(range=[1, 6])
 st.plotly_chart(plot, s=100)
