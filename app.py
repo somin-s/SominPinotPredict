@@ -45,13 +45,8 @@ def Modules(prediction_proba1, prediction_proba2):
     Juice_aspartic_acid = np.exp(prediction_proba2[12]-2)*100
     Juice_serine = np.exp(prediction_proba2[13])
 
-    source2 = pd.DataFrame({
-        'Value': ['Berry OD280','Berry OD320','Berry OD520','Juice total soluble solids','Juice pH','Juice primary amino acids','Juice malic acid'
-                    ,'Juice tartaric acid','Juice calcium','Juice potassium','Juice alanine','Juice arginine','Juice aspartic acid','Juice serine'],
-        'Rate': [Berry_OD280,Berry_OD320,Berry_OD520,Juice_total_soluble_solids,Juice_pH,Juice_primary_amino_acids,Juice_malic_acid
+    source2 = [Berry_OD280,Berry_OD320,Berry_OD520,Juice_total_soluble_solids,Juice_pH,Juice_primary_amino_acids,Juice_malic_acid
                     ,Juice_tartaric_acid,Juice_calcium,Juice_potassium,Juice_alanine,Juice_arginine,Juice_aspartic_acid,Juice_serine]
-     })
-
     #module3 ==================================================================================================================
     Berry_OD280 = np.log(Berry_OD280/10+1)
     Berry_OD320 = np.log(Berry_OD320+1)
@@ -79,6 +74,8 @@ def Modules(prediction_proba1, prediction_proba2):
     Wine_total_anthocyanin = (np.exp(ThirdMol_value[0][3])-1)*500
     Wine_total_phenolics = (np.exp(ThirdMol_value[0][4])-1)*20
 
+
+    source3 = [Wine_alcohol,Wine_pH,Wine_monomeric_anthocyanins,Wine_total_anthocyanin,Wine_total_phenolics]
     #module4 ==================================================================================================================
     Wine_alcohol = np.log(Wine_alcohol/10)
     Wine_pH = np.log(Wine_pH)
@@ -90,16 +87,16 @@ def Modules(prediction_proba1, prediction_proba2):
     quality = np.exp(FourthMol_value[0])+1
     quality = round(quality,2)
 
-    Quality_yieldperwine = [quality, Yield_per_wine, Yield_per_m, Yield_per_m2]
+    Quality_yieldperwine = [quality, Yield_per_wine, Yield_per_m, Yield_per_m2,source2,source3]
     return Quality_yieldperwine
 
 #=============================================================================================================================== Main
 Cluster_number = st.sidebar.slider('Cluster number', 1.0, 52.0, 23.0, 1.0) 
-Cluster_weight = st.sidebar.slider('Cluster weight', 35.0, 253.0, 144.0, 1.0) 
-Shoot_number_more_5mm = st.sidebar.slider('Shoot number> 5mm', 4.0, 30.0, 12.0, 1.0) 
-Vine_canopy = st.sidebar.slider('Vine_canopy', 0.0, 1.0, 0.5, 0.001) 
-Leaf_Area_per_m = st.sidebar.slider('Leaf Area/m', 2800.0, 32000.0, 12000.0, 1.0) 
-Berry_weight = st.sidebar.slider('Berry weight', 1.0, 2.0, 1.78, 0.001) 
+Cluster_weight = st.sidebar.slider('Cluster weight (g)', 35.0, 253.0, 144.0, 1.0) 
+Shoot_number_more_5mm = st.sidebar.slider('Shoot number', 4.0, 30.0, 12.0, 1.0) 
+Vine_canopy = st.sidebar.slider('Vine canopy (%)', 0.0, 1.0, 0.5, 0.001) 
+Leaf_Area_per_m = st.sidebar.slider('Leaf Area/metre', 2800.0, 32000.0, 12000.0, 1.0) 
+Berry_weight = st.sidebar.slider('Berry weight (g)', 1.0, 2.0, 1.78, 0.001) 
 
 features = {'Cluster_number': Cluster_number,
             'Cluster_weight': Cluster_weight,
@@ -117,17 +114,18 @@ Vine_canopy_input = pd.to_numeric(data.get("Vine_canopy")[0])
 Leaf_area_input = pd.to_numeric(data.get("Leaf_Area_per_m")[0])
 Berry_weight_input = pd.to_numeric(data.get("Berry_weight")[0])
 
-Cluster_number_ran = np.random.normal(Cluster_number_input,4.0,30)
-Cluster_weight_ran = np.random.normal(Cluster_weight_input,4.0,30)
-Shoot_number_more_5mm_ran = np.random.normal(Shoot_num_input,4.0,30)
-Vine_canopy_ran = np.random.normal(Vine_canopy_input,0.1,30)
-Leaf_Area_per_m_ran = np.random.normal(Leaf_area_input,13.6,30)
-Berry_weight_ran = np.random.normal(Berry_weight_input,0.1,30)
+Cluster_number_ran = np.random.normal(Cluster_number_input,4.0,20)
+Cluster_weight_ran = np.random.normal(Cluster_weight_input,4.0,20)
+Shoot_number_more_5mm_ran = np.random.normal(Shoot_num_input,4.0,20)
+Vine_canopy_ran = np.random.normal(Vine_canopy_input,0.1,20)
+Leaf_Area_per_m_ran = np.random.normal(Leaf_area_input,13.6,20)
+Berry_weight_ran = np.random.normal(Berry_weight_input,0.1,20)
 
-Arr_Quality_yield = pd.DataFrame(columns=['Quality','Yield','Value'])
-Arr_Quality_yield_list = pd.DataFrame(columns=['Quality','Yield per wine','Yield per metre','Yield per metre2'])
-
-for i in range(30):
+Arr_Quality_yield = pd.DataFrame()
+Arr_Quality_yield_list = pd.DataFrame()
+Arr_model2 = pd.DataFrame()
+Arr_model3 = pd.DataFrame()
+for i in range(20):
 
     #Preprocess for Module1
     Cluster_number1 = np.log(Cluster_number_ran[i]/10+1)
@@ -159,33 +157,37 @@ for i in range(30):
 
     source = Modules(FirstMol_value[0],SecondMol_value[0])
     Arr_Quality_yield = Arr_Quality_yield.append({'Quality': source[0],'Yield': "Yield per wine",'Value': source[1], 'Info': "Information", 
-    'Cluster number':cn,'Cluster weight':cw,'Shoot number':sn,'Vine canopy': vc,'Leaf area':la,'Berry weight':bw},ignore_index=True)
+    'Cluster number':cn,'Cluster weight (g)':cw,'Shoot number':sn,'Vine canopy (%)': vc,'Leaf area / metre':la,'Berry weight (g)':bw},ignore_index=True)
     Arr_Quality_yield = Arr_Quality_yield.append({'Quality': source[0],'Yield': "Yield per metre",'Value': source[2], 'Info': "Information", 
-    'Cluster number':cn,'Cluster weight':cw,'Shoot number':sn,'Vine canopy': vc,'Leaf area':la,'Berry weight':bw},ignore_index=True)
+    'Cluster number':cn,'Cluster weight (g)':cw,'Shoot number':sn,'Vine canopy (%)': vc,'Leaf area / metre':la,'Berry weight (g)':bw},ignore_index=True)
     Arr_Quality_yield = Arr_Quality_yield.append({'Quality': source[0],'Yield': "Yield per square metre",'Value': source[3], 'Info': "Information", 
-    'Cluster number':cn,'Cluster weight':cw,'Shoot number':sn,'Vine canopy': vc,'Leaf area':la,'Berry weight':bw},ignore_index=True)
+    'Cluster number':cn,'Cluster weight (g)':cw,'Shoot number':sn,'Vine canopy (%)': vc,'Leaf area / metre':la,'Berry weight (g)':bw},ignore_index=True)
 
     quality = round(source[0],2)
     Yield_per_wine = round(source[1],2)
     Yield_per_metre = round(source[2],2)
     Yield_per_metre2 = round(source[3],2)
-    Arr_Quality_yield_list = Arr_Quality_yield_list.append({'Quality':quality,'Yield per wine': Yield_per_wine,'Yield per metre': Yield_per_metre,'Yield per metre2': Yield_per_metre2},ignore_index=True)
+    Arr_Quality_yield_list = Arr_Quality_yield_list.append({'Quality':quality,'Yield per wine': Yield_per_wine,'Yield per metre': Yield_per_metre,'Yield per square metre': Yield_per_metre2},ignore_index=True)
+
+    Arr_model2 = Arr_model2.append({'Berry OD280(AU)':source[4][0],'Berry OD320(AU)':source[4][1],'Berry OD520(AU)':source[4][2],'Juice total soluble solids(oBrix)':source[4][3],'Juice pH':source[4][4],'Juice primary amino acids(g/L)':source[4][5],'Juice malic acid(g/L)':source[4][6],
+                    'Juice tartaric acid(g/L)':source[4][7],'Juice calcium(mg/L)':source[4][8],'Juice potassium(mg/L)':source[4][9],'Juice alanine(μmol/L)':source[4][10],'Juice arginine(μmol/L)':source[4][11],'Juice aspartic acid(μmol/L)':source[4][12],'Juice serine':source[4][13]},ignore_index=True)
+    Arr_model3 = Arr_model3.append({'Wine alcohol(% v/v)':source[5][0],'Wine pH':source[5][1],'Wine monomeric anthocyanins(mg/L M3G)':source[5][2],'Wine total anthocyanin(mg/L M3G)':source[5][3],'Wine total phenolics':source[5][4]},ignore_index=True)
 
 #==============================================================================================================================plot graph
 
-category = px.scatter(Arr_Quality_yield, x="Quality", y="Value", color="Yield", trendline= "ols", hover_name='Info', hover_data=["Cluster number", "Cluster weight","Shoot number","Vine canopy","Leaf area","Berry weight"])
+category = px.scatter(Arr_Quality_yield, x="Quality", y="Value", color="Yield", trendline= "ols", hover_name='Info', hover_data=["Cluster number","Cluster weight (g)","Shoot number","Vine canopy (%)","Leaf area / metre","Berry weight (g)"])
 category.update_yaxes(range=[2.5,3.5])
 category.update_xaxes(range=[4.5,5.5])
 st.plotly_chart(category, s=100)
 
-plot = px.scatter(Arr_Quality_yield, x="Quality",y="Value", color="Yield", facet_col="Yield",hover_name='Info', hover_data=["Cluster number", "Cluster weight","Shoot number","Vine canopy","Leaf area","Berry weight"])
+plot = px.scatter(Arr_Quality_yield, x="Quality",y="Value", color="Yield", facet_col="Yield",hover_name='Info', hover_data=["Cluster number","Cluster weight (g)","Shoot number","Vine canopy (%)","Leaf area / metre","Berry weight (g)"])
 #plot.update_xaxes(range=[1, 5])
 #plot.update_yaxes(range=[1, 6])
 st.plotly_chart(plot, s=100)
 
-
-
-if st.checkbox("Ouput table"):
-    st.table(Arr_Quality_yield_list)#show table
+if st.checkbox("Ouput 20 samples"):
+    st.table(Arr_model2)
+    st.table(Arr_model3)
+    
 
         
