@@ -167,7 +167,7 @@ for i in range(20):
     Yield_per_wine = round(source[1],2)
     Yield_per_metre = round(source[2],2)
     Yield_per_metre2 = round(source[3],2)
-    Arr_Quality_yield_list = Arr_Quality_yield_list.append({'Quality':quality,'Yield per wine': Yield_per_wine,'Yield per metre': Yield_per_metre,'Yield per square metre': Yield_per_metre2},ignore_index=True)
+    ##Arr_Quality_yield_list = Arr_Quality_yield_list.append({'Quality':quality,'Yield per wine': Yield_per_wine,'Yield per metre': Yield_per_metre,'Yield per square metre': Yield_per_metre2},ignore_index=True)
 
     ##Arr_model2 = Arr_model2.append({'Berry OD280(AU)':source[4][0],'Berry OD320(AU)':source[4][1],'Berry OD520(AU)':source[4][2],'Juice total soluble solids(oBrix)':source[4][3],'Juice pH':source[4][4],'Juice primary amino acids(g/L)':source[4][5],'Juice malic acid(g/L)':source[4][6],
     ##                'Juice tartaric acid(g/L)':source[4][7],'Juice calcium(mg/L)':source[4][8],'Juice potassium(mg/L)':source[4][9],'Juice alanine(μmol/L)':source[4][10],'Juice arginine(μmol/L)':source[4][11],'Juice aspartic acid(μmol/L)':source[4][12],'Juice serine':source[4][13]},ignore_index=True)
