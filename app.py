@@ -176,9 +176,9 @@ for i in range(20):
 #==============================================================================================================================plot graph
 
 #category = px.scatter(Arr_Quality_yield, x="Quality", y="Value", color="Yield", trendline= "ols", hover_name='Info', hover_data=["Cluster number","Cluster weight (g)","Shoot number","Vine canopy (%)","Leaf area / metre","Berry weight (g)"])
-category.update_yaxes(range=[2.5,3.5])
-category.update_xaxes(range=[4.5,5.5])
-st.plotly_chart(category, s=100)
+##category.update_yaxes(range=[2.5,3.5])
+##category.update_xaxes(range=[4.5,5.5])
+##st.plotly_chart(category, s=100)
 
 #plot = px.scatter(Arr_Quality_yield, x="Quality",y="Value", color="Yield", facet_col="Yield",hover_name='Info', hover_data=["Cluster number","Cluster weight (g)","Shoot number","Vine canopy (%)","Leaf area / metre","Berry weight (g)"])
 plot.update_xaxes(range=[1, 5])
