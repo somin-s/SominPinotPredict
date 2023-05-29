@@ -181,9 +181,9 @@ for i in range(20):
 ##st.plotly_chart(category, s=100)
 
 #plot = px.scatter(Arr_Quality_yield, x="Quality",y="Value", color="Yield", facet_col="Yield",hover_name='Info', hover_data=["Cluster number","Cluster weight (g)","Shoot number","Vine canopy (%)","Leaf area / metre","Berry weight (g)"])
-plot.update_xaxes(range=[1, 5])
-plot.update_yaxes(range=[1, 6])
-st.plotly_chart(plot, s=100)
+#plot.update_xaxes(range=[1, 5])
+#plot.update_yaxes(range=[1, 6])
+#st.plotly_chart(plot, s=100)
 
 if st.checkbox("Ouput 20 samples"):
     st.table(Arr_model2)
