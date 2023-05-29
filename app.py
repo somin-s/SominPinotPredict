@@ -156,12 +156,12 @@ for i in range(20):
 
 
     source = Modules(FirstMol_value[0],SecondMol_value[0])
-    Arr_Quality_yield = Arr_Quality_yield.append({'Quality': source[0],'Yield': "Yield per wine",'Value': source[1], 'Info': "Information", 
-    'Cluster number':cn,'Cluster weight (g)':cw,'Shoot number':sn,'Vine canopy (%)': vc,'Leaf area / metre':la,'Berry weight (g)':bw},ignore_index=True)
-    Arr_Quality_yield = Arr_Quality_yield.append({'Quality': source[0],'Yield': "Yield per metre",'Value': source[2], 'Info': "Information", 
-    'Cluster number':cn,'Cluster weight (g)':cw,'Shoot number':sn,'Vine canopy (%)': vc,'Leaf area / metre':la,'Berry weight (g)':bw},ignore_index=True)
-    Arr_Quality_yield = Arr_Quality_yield.append({'Quality': source[0],'Yield': "Yield per square metre",'Value': source[3], 'Info': "Information", 
-    'Cluster number':cn,'Cluster weight (g)':cw,'Shoot number':sn,'Vine canopy (%)': vc,'Leaf area / metre':la,'Berry weight (g)':bw},ignore_index=True)
+    #Arr_Quality_yield = Arr_Quality_yield.append({'Quality': source[0],'Yield': "Yield per wine",'Value': source[1], 'Info': "Information", 
+    #'Cluster number':cn,'Cluster weight (g)':cw,'Shoot number':sn,'Vine canopy (%)': vc,'Leaf area / metre':la,'Berry weight (g)':bw},ignore_index=True)
+    #Arr_Quality_yield = Arr_Quality_yield.append({'Quality': source[0],'Yield': "Yield per metre",'Value': source[2], 'Info': "Information", 
+    #'Cluster number':cn,'Cluster weight (g)':cw,'Shoot number':sn,'Vine canopy (%)': vc,'Leaf area / metre':la,'Berry weight (g)':bw},ignore_index=True)
+    #Arr_Quality_yield = Arr_Quality_yield.append({'Quality': source[0],'Yield': "Yield per square metre",'Value': source[3], 'Info': "Information", 
+    #'Cluster number':cn,'Cluster weight (g)':cw,'Shoot number':sn,'Vine canopy (%)': vc,'Leaf area / metre':la,'Berry weight (g)':bw},ignore_index=True)
 
     quality = round(source[0],2)
     Yield_per_wine = round(source[1],2)
@@ -175,14 +175,14 @@ for i in range(20):
 
 #==============================================================================================================================plot graph
 
-category = px.scatter(Arr_Quality_yield, x="Quality", y="Value", color="Yield", trendline= "ols", hover_name='Info', hover_data=["Cluster number","Cluster weight (g)","Shoot number","Vine canopy (%)","Leaf area / metre","Berry weight (g)"])
-#category.update_yaxes(range=[2.5,3.5])
-#category.update_xaxes(range=[4.5,5.5])
+#category = px.scatter(Arr_Quality_yield, x="Quality", y="Value", color="Yield", trendline= "ols", hover_name='Info', hover_data=["Cluster number","Cluster weight (g)","Shoot number","Vine canopy (%)","Leaf area / metre","Berry weight (g)"])
+category.update_yaxes(range=[2.5,3.5])
+category.update_xaxes(range=[4.5,5.5])
 st.plotly_chart(category, s=100)
 
-plot = px.scatter(Arr_Quality_yield, x="Quality",y="Value", color="Yield", facet_col="Yield",hover_name='Info', hover_data=["Cluster number","Cluster weight (g)","Shoot number","Vine canopy (%)","Leaf area / metre","Berry weight (g)"])
-#plot.update_xaxes(range=[1, 5])
-#plot.update_yaxes(range=[1, 6])
+#plot = px.scatter(Arr_Quality_yield, x="Quality",y="Value", color="Yield", facet_col="Yield",hover_name='Info', hover_data=["Cluster number","Cluster weight (g)","Shoot number","Vine canopy (%)","Leaf area / metre","Berry weight (g)"])
+plot.update_xaxes(range=[1, 5])
+plot.update_yaxes(range=[1, 6])
 st.plotly_chart(plot, s=100)
 
 if st.checkbox("Ouput 20 samples"):
