@@ -156,12 +156,12 @@ for i in range(20):
 
 
     source = Modules(FirstMol_value[0],SecondMol_value[0])
-    #Arr_Quality_yield = Arr_Quality_yield.append({'Quality': source[0],'Yield': "Yield per wine",'Value': source[1], 'Info': "Information", 
-    #'Cluster number':cn,'Cluster weight (g)':cw,'Shoot number':sn,'Vine canopy (%)': vc,'Leaf area / metre':la,'Berry weight (g)':bw},ignore_index=True)
-    #Arr_Quality_yield = Arr_Quality_yield.append({'Quality': source[0],'Yield': "Yield per metre",'Value': source[2], 'Info': "Information", 
-    #'Cluster number':cn,'Cluster weight (g)':cw,'Shoot number':sn,'Vine canopy (%)': vc,'Leaf area / metre':la,'Berry weight (g)':bw},ignore_index=True)
-    #Arr_Quality_yield = Arr_Quality_yield.append({'Quality': source[0],'Yield': "Yield per square metre",'Value': source[3], 'Info': "Information", 
-    #'Cluster number':cn,'Cluster weight (g)':cw,'Shoot number':sn,'Vine canopy (%)': vc,'Leaf area / metre':la,'Berry weight (g)':bw},ignore_index=True)
+    ##Arr_Quality_yield = Arr_Quality_yield.append({'Quality': source[0],'Yield': "Yield per wine",'Value': source[1], 'Info': "Information", 
+    ##'Cluster number':cn,'Cluster weight (g)':cw,'Shoot number':sn,'Vine canopy (%)': vc,'Leaf area / metre':la,'Berry weight (g)':bw},ignore_index=True)
+    ##Arr_Quality_yield = Arr_Quality_yield.append({'Quality': source[0],'Yield': "Yield per metre",'Value': source[2], 'Info': "Information", 
+    ##'Cluster number':cn,'Cluster weight (g)':cw,'Shoot number':sn,'Vine canopy (%)': vc,'Leaf area / metre':la,'Berry weight (g)':bw},ignore_index=True)
+    ##Arr_Quality_yield = Arr_Quality_yield.append({'Quality': source[0],'Yield': "Yield per square metre",'Value': source[3], 'Info': "Information", 
+    ##'Cluster number':cn,'Cluster weight (g)':cw,'Shoot number':sn,'Vine canopy (%)': vc,'Leaf area / metre':la,'Berry weight (g)':bw},ignore_index=True)
 
     quality = round(source[0],2)
     Yield_per_wine = round(source[1],2)
@@ -169,9 +169,9 @@ for i in range(20):
     Yield_per_metre2 = round(source[3],2)
     Arr_Quality_yield_list = Arr_Quality_yield_list.append({'Quality':quality,'Yield per wine': Yield_per_wine,'Yield per metre': Yield_per_metre,'Yield per square metre': Yield_per_metre2},ignore_index=True)
 
-    Arr_model2 = Arr_model2.append({'Berry OD280(AU)':source[4][0],'Berry OD320(AU)':source[4][1],'Berry OD520(AU)':source[4][2],'Juice total soluble solids(oBrix)':source[4][3],'Juice pH':source[4][4],'Juice primary amino acids(g/L)':source[4][5],'Juice malic acid(g/L)':source[4][6],
-                    'Juice tartaric acid(g/L)':source[4][7],'Juice calcium(mg/L)':source[4][8],'Juice potassium(mg/L)':source[4][9],'Juice alanine(μmol/L)':source[4][10],'Juice arginine(μmol/L)':source[4][11],'Juice aspartic acid(μmol/L)':source[4][12],'Juice serine':source[4][13]},ignore_index=True)
-    Arr_model3 = Arr_model3.append({'Wine alcohol(% v/v)':source[5][0],'Wine pH':source[5][1],'Wine monomeric anthocyanins(mg/L M3G)':source[5][2],'Wine total anthocyanin(mg/L M3G)':source[5][3],'Wine total phenolics':source[5][4]},ignore_index=True)
+    ##Arr_model2 = Arr_model2.append({'Berry OD280(AU)':source[4][0],'Berry OD320(AU)':source[4][1],'Berry OD520(AU)':source[4][2],'Juice total soluble solids(oBrix)':source[4][3],'Juice pH':source[4][4],'Juice primary amino acids(g/L)':source[4][5],'Juice malic acid(g/L)':source[4][6],
+    ##                'Juice tartaric acid(g/L)':source[4][7],'Juice calcium(mg/L)':source[4][8],'Juice potassium(mg/L)':source[4][9],'Juice alanine(μmol/L)':source[4][10],'Juice arginine(μmol/L)':source[4][11],'Juice aspartic acid(μmol/L)':source[4][12],'Juice serine':source[4][13]},ignore_index=True)
+    ##Arr_model3 = Arr_model3.append({'Wine alcohol(% v/v)':source[5][0],'Wine pH':source[5][1],'Wine monomeric anthocyanins(mg/L M3G)':source[5][2],'Wine total anthocyanin(mg/L M3G)':source[5][3],'Wine total phenolics':source[5][4]},ignore_index=True)
 
 #==============================================================================================================================plot graph
 
