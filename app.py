@@ -157,7 +157,7 @@ for i in range(20):
 
     source = Modules(FirstMol_value[0],SecondMol_value[0])
     Arr_Quality_yield = Arr_Quality_yield.concat({'Quality': source[0],'Yield': "Yield per wine",'Value': source[1], 'Info': "Information", 
-    ##'Cluster number':cn,'Cluster weight (g)':cw,'Shoot number':sn,'Vine canopy (%)': vc,'Leaf area / metre':la,'Berry weight (g)':bw},ignore_index=True)
+    'Cluster number':cn,'Cluster weight (g)':cw,'Shoot number':sn,'Vine canopy (%)': vc,'Leaf area / metre':la,'Berry weight (g)':bw},ignore_index=True)
     ##Arr_Quality_yield = Arr_Quality_yield.append({'Quality': source[0],'Yield': "Yield per metre",'Value': source[2], 'Info': "Information", 
     ##'Cluster number':cn,'Cluster weight (g)':cw,'Shoot number':sn,'Vine canopy (%)': vc,'Leaf area / metre':la,'Berry weight (g)':bw},ignore_index=True)
     ##Arr_Quality_yield = Arr_Quality_yield.append({'Quality': source[0],'Yield': "Yield per square metre",'Value': source[3], 'Info': "Information", 
