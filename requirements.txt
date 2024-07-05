@@ -1,0 +1,10 @@
+streamlit
+pandas
+joblib==1.4.0
+scikit-learn==1.2.2
+matplotlib
+altair
+plotly
+statsmodels
+#math
+#tensorflow
