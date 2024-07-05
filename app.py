@@ -13,7 +13,7 @@ import plotly.express as px
 #from tensorflow import keras
 
 
-model_1 = joblib.load(open("model1_final.joblib","rb"))
+model_1 = joblib.load("model1_final.joblib","rb")
 model_2 = joblib.load('model2_final.joblib')
 model_3 = joblib.load('model3_final.joblib')
 model_4 = joblib.load('model4_final.joblib')
