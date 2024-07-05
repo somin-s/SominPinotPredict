@@ -1,11 +1,10 @@
-streamlit
-pandas
-joblib==1.4.0
+streamlit==1.19.0
+pandas==1.4.4
+joblib==1.1.1
 scikit-learn==1.2.2
 matplotlib
 altair
 plotly
 statsmodels
-lightgbm
 #math
 #tensorflow
