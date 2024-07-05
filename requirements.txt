@@ -1,6 +1,6 @@
 streamlit
 pandas
-joblib==1.4.0
+joblib
 scikit-learn==1.2.2
 matplotlib
 altair
